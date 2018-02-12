@@ -4,6 +4,9 @@ using CommandOrchestrator.Interfaces;
 
 namespace CommandOrchestrator
 {
+    /// <summary>
+    ///     Command scope
+    /// </summary>
     public class CommandScope : ICommand
     {
         /// <summary>
@@ -16,7 +19,10 @@ namespace CommandOrchestrator
         /// </summary>
         private Stack<ICommand> _executedCommands;
 
-
+        /// <summary>
+        ///     Run scope of commands
+        /// </summary>
+        /// <param name="context"></param>
         public void Execute(ICommandContext context)
         {
             _executedCommands.Clear();
@@ -28,6 +34,10 @@ namespace CommandOrchestrator
             }
         }
 
+        /// <summary>
+        ///     Rollback commands
+        /// </summary>
+        /// <param name="context"></param>
         public void Rollback(ICommandContext context)
         {
             while (_executedCommands.Any()) _executedCommands.Pop().Rollback(context);
@@ -40,6 +50,11 @@ namespace CommandOrchestrator
             _executedCommands = null;
         }
 
+        /// <summary>
+        ///     Add command to scope
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public CommandScope Add(ICommand command)
         {
             _commands.Add(command);
@@ -47,6 +62,10 @@ namespace CommandOrchestrator
             return this;
         }
 
+        /// <summary>
+        ///     Initialize command scope
+        /// </summary>
+        /// <returns></returns>
         public CommandScope Init()
         {
             _commands = new List<ICommand>();
@@ -55,9 +74,13 @@ namespace CommandOrchestrator
             return this;
         }
 
+        /// <summary>
+        ///     Execute command scope on runner
+        /// </summary>
+        /// <param name="commandRunner"></param>
         public void Run(ICommandRunner commandRunner)
         {
-            commandRunner.Run(this);
+            commandRunner?.Run(this);
         }
     }
 }

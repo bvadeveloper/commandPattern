@@ -8,12 +8,18 @@ namespace CommandOrchestrator
     /// </summary>
     public class CommandContext : ICommandContext
     {
+        /// <summary>
+        ///     Ctor
+        /// </summary>
         public CommandContext()
         {
             // init common fields for context, if necessary
             Context = new Dictionary<string, object>();
         }
 
+        /// <summary>
+        ///     Simple context storage
+        /// </summary>
         public Dictionary<string, object> Context { get; set; }
 
         public void Dispose()

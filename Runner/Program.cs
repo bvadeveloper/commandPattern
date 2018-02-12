@@ -18,6 +18,7 @@ namespace Runner
                 }
             };
 
+            // init command executor
             var runner = new CommandRunner(context);
 
             // init command/transaction scope
