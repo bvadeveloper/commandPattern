@@ -25,7 +25,7 @@ namespace Runner
                 new FailureCommand()
             });
             
-            // init context if you need
+            // context initialization if necessary
             var commandContext = new CommandContext{Context = new Dictionary<string, object>
             {
                 ["team"] = new List<string>(),
