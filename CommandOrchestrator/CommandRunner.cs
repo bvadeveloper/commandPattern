@@ -2,21 +2,15 @@
 
 namespace CommandOrchestrator
 {
-    public class CommandRunner : IDisposable
+    public class CommandRunner
     {
         private readonly ICommand _command;
         private readonly ICommandContext _context;
 
-        public CommandRunner(ICommand command, ICommandContext context)
+        public CommandRunner(ICommand command, ICommandContext commandContext = null)
         {
             _command = command;
-            _context = context;
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-            _command.Dispose();
+            _context = commandContext ?? new CommandContext();
         }
 
         public void Run()

@@ -53,5 +53,11 @@ namespace CommandOrchestrator
 
             return this;
         }
+
+        public void Run(ICommandContext commandContext = null)
+        {
+            var runner = new CommandRunner(this, commandContext);
+            runner.Run();
+        }
     }
 }

@@ -9,20 +9,8 @@ namespace Runner
     {
         private static void Main(string[] args)
         {
-            // init command/transaction scope
-            var commandScope = new CommandScope()
-                .Init()
-                .Add(new AddShipCommand("Black Cuttlefish"))
-                .Add(new AddTeamCommand("John Silver"))
-                .Add(new AddTeamCommand("Capitan Smollet"))
-                .Add(new AddTeamCommand("Doctor Livcy"))
-                .Add(new AddTeamCommand("Billi Bonc"))
-                .Add(new AddTeamCommand("Jim"))
-                .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
-                .Add(new FailureCommand());
-
             // context initialization if necessary
-            var commandContext = new CommandContext
+            var context = new CommandContext
             {
                 Context = new Dictionary<string, object>
                 {
@@ -30,12 +18,20 @@ namespace Runner
                 }
             };
 
-            using (var commandRunner = new CommandRunner(commandScope, commandContext))
+            // init command/transaction scope
+            using (var scope = new CommandScope())
             {
-                commandRunner.Run();
+                scope.Init()
+                    .Add(new AddShipCommand("Black Cuttlefish"))
+                    .Add(new AddTeamCommand("John Silver"))
+                    .Add(new AddTeamCommand("Capitan Smollet"))
+                    .Add(new AddTeamCommand("Doctor Livcy"))
+                    .Add(new AddTeamCommand("Billi Bonc"))
+                    .Add(new AddTeamCommand("Jim"))
+                    .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
+                    .Add(new FailureCommand())
+                    .Run(context);
             }
-
-            Console.ReadKey();
         }
     }
 }
