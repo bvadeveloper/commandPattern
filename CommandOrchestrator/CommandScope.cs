@@ -19,6 +19,12 @@ namespace CommandOrchestrator
         /// </summary>
         private Stack<ICommand> _executedCommands;
 
+        public CommandScope()
+        {
+            _commands = new List<ICommand>();
+            _executedCommands = new Stack<ICommand>();
+        }
+
         /// <summary>
         ///     Run scope of commands
         /// </summary>
@@ -78,9 +84,11 @@ namespace CommandOrchestrator
         ///     Execute command scope on runner
         /// </summary>
         /// <param name="commandRunner"></param>
-        public void Run(ICommandRunner commandRunner)
+        public CommandScope Run(ICommandRunner commandRunner)
         {
             commandRunner?.Run(this);
+
+            return this;
         }
     }
 }

@@ -33,6 +33,13 @@ namespace Runner
                     .Add(new AddTeamCommand("Jim"))
                     .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
                     .Add(new FailureCommand())
+                    .Run(runner)
+                    // with fluent, we can do something like this
+                    .Init()
+                    .Add(new AddTeamCommand("Billi Bonc"))
+                    .Add(new AddTeamCommand("Jim"))
+                    .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
+                    .Add(new FailureCommand())
                     .Run(runner);
             }
         }
