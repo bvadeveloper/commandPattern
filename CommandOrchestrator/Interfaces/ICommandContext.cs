@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CommandOrchestrator
+namespace CommandOrchestrator.Interfaces
 {
     /// <summary>
     ///     Context storage inteface

@@ -18,6 +18,8 @@ namespace Runner
                 }
             };
 
+            var runner = new CommandRunner(context);
+
             // init command/transaction scope
             using (var scope = new CommandScope())
             {
@@ -30,7 +32,7 @@ namespace Runner
                     .Add(new AddTeamCommand("Jim"))
                     .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
                     .Add(new FailureCommand())
-                    .Run(context);
+                    .Run(runner);
             }
         }
     }

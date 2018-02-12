@@ -1,30 +1,31 @@
 ﻿using System;
+using CommandOrchestrator.Interfaces;
 
 namespace CommandOrchestrator
 {
-    public class CommandRunner
+    public class CommandRunner : ICommandRunner
     {
-        private readonly ICommand _command;
         private readonly ICommandContext _context;
 
-        public CommandRunner(ICommand command, ICommandContext commandContext = null)
+        public CommandRunner(ICommandContext commandContext = null)
         {
-            _command = command;
             _context = commandContext ?? new CommandContext();
         }
 
-        public void Run()
+        public void Run(ICommand command)
         {
+            if (command == null) return;
+
             try
             {
-                _command.Execute(_context);
+                command.Execute(_context);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(Environment.NewLine);
 
-                _command.Rollback(_context);
+                command.Rollback(_context);
             }
         }
     }

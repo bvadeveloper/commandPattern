@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using CommandOrchestrator.Interfaces;
 
 namespace CommandOrchestrator
 {
     /// <summary>
-    ///     Context storage implementation
+    ///     Context storage
     /// </summary>
     public class CommandContext : ICommandContext
     {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CommandOrchestrator.Interfaces;
 
 namespace CommandOrchestrator
 {
@@ -54,10 +55,9 @@ namespace CommandOrchestrator
             return this;
         }
 
-        public void Run(ICommandContext commandContext = null)
+        public void Run(ICommandRunner commandRunner)
         {
-            var runner = new CommandRunner(this, commandContext);
-            runner.Run();
+            commandRunner.Run(this);
         }
     }
 }

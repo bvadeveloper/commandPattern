@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommandOrchestrator
+namespace CommandOrchestrator.Interfaces
 {
     /// <summary>
     ///     Base command interface
