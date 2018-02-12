@@ -10,26 +10,25 @@ namespace Runner
         private static void Main(string[] args)
         {
             // init command/transaction scope
-            var commandScope = new CommandScope(new List<ICommand>
-            {
-                new AddShipCommand("Black Cuttlefish"),
+            var commandScope = new CommandScope()
+                .Init()
+                .Add(new AddShipCommand("Black Cuttlefish"))
+                .Add(new AddTeamCommand("John Silver"))
+                .Add(new AddTeamCommand("Capitan Smollet"))
+                .Add(new AddTeamCommand("Doctor Livcy"))
+                .Add(new AddTeamCommand("Billi Bonc"))
+                .Add(new AddTeamCommand("Jim"))
+                .Add(new AddRegattaCommand(Guid.NewGuid().ToString()))
+                .Add(new FailureCommand());
 
-                new AddTeamCommand("John Silver"),
-                new AddTeamCommand("Capitan Smollet"),
-                new AddTeamCommand("Doctor Livcy"),
-                new AddTeamCommand("Billi Bonc"),
-                new AddTeamCommand("Jim"),
-
-                new AddRegattaCommand(Guid.NewGuid().ToString()),
-                
-                new FailureCommand()
-            });
-            
             // context initialization if necessary
-            var commandContext = new CommandContext{Context = new Dictionary<string, object>
+            var commandContext = new CommandContext
             {
-                ["team"] = new List<string>(),
-            }};
+                Context = new Dictionary<string, object>
+                {
+                    ["team"] = new List<string>()
+                }
+            };
 
             using (var commandRunner = new CommandRunner(commandScope, commandContext))
             {

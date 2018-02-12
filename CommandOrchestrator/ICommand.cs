@@ -3,7 +3,7 @@
 namespace CommandOrchestrator
 {
     /// <summary>
-    /// Base command interface
+    ///     Base command interface
     /// </summary>
     public interface ICommand : IDisposable
     {

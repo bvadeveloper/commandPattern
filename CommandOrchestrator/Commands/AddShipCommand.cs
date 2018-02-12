@@ -15,7 +15,7 @@ namespace CommandOrchestrator.Commands
         public void Execute(ICommandContext commandContext)
         {
             // payload 
-            
+
             Console.WriteLine($"{typeof(AddShipCommand)} run");
 
             commandContext.Context["ship"] = _shipName;

@@ -9,18 +9,16 @@ namespace CommandOrchestrator.Commands
         public void Execute(ICommandContext commandContext)
         {
             // payload 
-            
+
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine($"Ship: {commandContext.Context["ship"]}");
 
             foreach (var teamMember in (List<string>) commandContext.Context["team"])
-            {
                 Console.WriteLine($"Member: {teamMember}");
-            }
 
             Console.WriteLine($"Regatta ID {commandContext.Context["regattaId"]}");
             Console.WriteLine(Environment.NewLine);
-            
+
             // throw exception
             throw new Exception("Something went wrong...");
         }

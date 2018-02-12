@@ -13,6 +13,12 @@ namespace CommandOrchestrator
             _context = context;
         }
 
+        public void Dispose()
+        {
+            _context.Dispose();
+            _command.Dispose();
+        }
+
         public void Run()
         {
             try
@@ -26,12 +32,6 @@ namespace CommandOrchestrator
 
                 _command.Rollback(_context);
             }
-        }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-            _command.Dispose();
         }
     }
 }

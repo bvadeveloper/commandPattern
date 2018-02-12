@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace CommandOrchestrator
 {
     /// <summary>
-    /// Context storage inteface
+    ///     Context storage inteface
     /// </summary>
     public interface ICommandContext : IDisposable
     {

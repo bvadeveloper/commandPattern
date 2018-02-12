@@ -15,7 +15,7 @@ namespace CommandOrchestrator.Commands
         public void Execute(ICommandContext commandContext)
         {
             // payload 
-            
+
             Console.WriteLine($"{typeof(AddRegattaCommand)} run");
 
             commandContext.Context["regattaId"] = _regattaId;
@@ -32,4 +32,4 @@ namespace CommandOrchestrator.Commands
         {
         }
     }
-} 
+}

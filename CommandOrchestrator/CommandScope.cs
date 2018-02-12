@@ -6,20 +6,15 @@ namespace CommandOrchestrator
     public class CommandScope : ICommand
     {
         /// <summary>
-        /// List of commands in the scope
+        ///     List of commands in the scope
         /// </summary>
-        private IEnumerable<ICommand> _commands;
+        private IList<ICommand> _commands;
 
         /// <summary>
-        /// Executed commands in the scope
+        ///     Executed commands in the scope
         /// </summary>
         private Stack<ICommand> _executedCommands;
 
-        public CommandScope(IEnumerable<ICommand> comannds)
-        {
-            _commands = comannds;
-            _executedCommands = new Stack<ICommand>();
-        }
 
         public void Execute(ICommandContext context)
         {
@@ -34,10 +29,7 @@ namespace CommandOrchestrator
 
         public void Rollback(ICommandContext context)
         {
-            while (_executedCommands.Any())
-            {
-                _executedCommands.Pop().Rollback(context);
-            }
+            while (_executedCommands.Any()) _executedCommands.Pop().Rollback(context);
         }
 
         public void Dispose()
@@ -45,6 +37,21 @@ namespace CommandOrchestrator
             _commands = null;
             _executedCommands.Clear();
             _executedCommands = null;
+        }
+
+        public CommandScope Add(ICommand command)
+        {
+            _commands.Add(command);
+
+            return this;
+        }
+
+        public CommandScope Init()
+        {
+            _commands = new List<ICommand>();
+            _executedCommands = new Stack<ICommand>();
+
+            return this;
         }
     }
 }
