@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandOrchestrator\CommandOrchestrator.csproj">
+      <Project>{3EF156EC-5967-407D-A6A7-1B4AB494D515}</Project>
+      <Name>CommandOrchestrator</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
